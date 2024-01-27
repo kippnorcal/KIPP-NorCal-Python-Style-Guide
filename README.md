@@ -189,6 +189,7 @@ Exception to this rule is when using the Django (Galaxy). It is common to import
 
 
 ## Boolean and None Type Testing<a id="boolean-none-comparisons"></a>
+TODO: Add content here
 
 ## Type Hinting<a id="type-hinting-syntax"></a>
 Type hinting is a little controversial in the Python community. Many people feel that it ges against dynamic typing, 
