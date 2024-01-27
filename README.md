@@ -24,6 +24,9 @@
   - [Docstrings](#docstrings)
 - [Exception Handling](#exception-handling)
 - [Opening Files/Writing to Files](#file-io)
+- [Quotes](#quotes)
+- [Multi-line Signatures and Function Calls](#multi-line)
+- [Line Length](#line-length)
 
 
 
@@ -241,6 +244,7 @@ print(results)
 ```
 
 ### Single Line Comments<a id="single-line-comments"></a>
+TODO: Add content 
 
 ### Docstrings<a id="docstrings"></a>
 For docstrings, follow [PEP 257](https://peps.python.org/pep-0257/). 
@@ -308,3 +312,12 @@ with open('file.txt') as f:
     for line in f:
         print(line)
 ```
+
+## Quotes<a id="quotes"></a>
+TODO: Add content here
+
+## Multi-line Signatures and Function Calls<a id="multi-line"></a>
+TODO: Add content here
+
+## Line Length<a id="line-length"></a>
+TODO: Add content here
