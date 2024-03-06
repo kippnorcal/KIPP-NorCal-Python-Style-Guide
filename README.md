@@ -4,29 +4,31 @@
 - [Introduction](#intro)
   - [Breaking Conventions](#breaking-conventions)
   - [Consistency](#consistency)
-- [Naming Conventions](#naming-conventions)
-  - [Names to Avoid](#names-avoid)
-  - [Package and Modules](#packages-modules)
-  - [Classes](#classes)
-  - [Methods/Functions](#methods-functions)
-    - [Leading and Trailing Underscores](#underscores)
-    - [Function/Method Arguements](#func-method-args)
-  - [Variables](#variables)
-- [Imports](#variables)
-  - [Import Practices](#import-practices)
-  - [Import Location and Organization](#import-organization)
-  - [Wildcard Imports Using *](#wildcard-imports)
-- [Boolean and None Type Testing](#boolean-none-comparisons)
-- [Type Hinting](#type-hinting-syntax)
-  - [Type Hinting Syntax](#type-hinting-syntax)
-- [Comments](#comments)
-  - [Single Line Comments](#single-line-comments)
-  - [Docstrings](#docstrings)
-- [Exception Handling](#exception-handling)
-- [Opening Files/Writing to Files](#file-io)
-- [Quotes](#quotes)
-- [Multi-line Signatures and Function Calls](#multi-line)
-- [Line Length](#line-length)
+- [Styles](#styles)
+  - [Naming Conventions](#naming-conventions)
+    - [Names to Avoid](#names-avoid)
+    - [Package and Modules](#packages-modules)
+    - [Classes](#classes)
+    - [Methods/Functions](#methods-functions)
+      - [Leading and Trailing Underscores](#underscores)
+      - [Function/Method Arguements](#func-method-args)
+    - [Variables](#variables)
+  - [Imports](#variables)
+    - [Import Practices](#import-practices)
+    - [Import Location and Organization](#import-organization)
+    - [Wildcard Imports Using *](#wildcard-imports)
+  - [Boolean and None Type Testing](#boolean-none-comparisons)
+  - [Type Hinting](#type-hinting-syntax)
+    - [Type Hinting Syntax](#type-hinting-syntax)
+  - [Comments](#comments)
+    - [Single Line Comments](#single-line-comments)
+    - [Docstrings](#docstrings)
+  - [Exception Handling](#exception-handling)
+  - [Opening Files/Writing to Files](#file-io)
+  - [Quotes](#quotes)
+  - [Multi-line Signatures and Function Calls](#multi-line)
+  - [Line Length](#line-length)
+- [Coding Practices](#practices)
 
 
 
@@ -44,7 +46,9 @@ perspectives on their reasoning for certain styles.
 - [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) - If it’s good for Google, it should be good enough for us
 - [The Hitchhiker's Guide to Python](https://docs.python-guide.org/writing/style/) 
 
-### Breaking Conventions<a id="breaking-conventions"></a>
+## Styles<a id="styles"></a>
+
+#### Breaking Conventions<a id="breaking-conventions"></a>
 Don't. Some of the above guides (specifically Google's) give leeway to breaking conventions. The most valid reason for 
 this has to deal with backwards compatibility. Backwards compatibility is not something we need to worry to deal with 
 at our organization.
@@ -52,39 +56,39 @@ at our organization.
 There is a lot of code that existed at KIPP NorCal before this style guide, and so there will be code that doesn't 
 conform this guide. Whenever refactoring this code, we should also work to clean up areas that don't follow convention.
 
-### Consistency<a id="consistency"></a>
+#### Consistency<a id="consistency"></a>
 There are some conventions that will lay out multiple options for a style convention (although, usually no more than 
 two). Which ever option you choose to use when building new code, use it consistently. Do not switch between them. 
 When working on existing code, stick to the convention that the original author chose to use.
 
-## Naming Conventions<a id="naming-conventions"></a>
+### Naming Conventions<a id="naming-conventions"></a>
 We will follow what [PEP 8](https://pep8.org/#naming-conventions) has laid out for naming conventions. Below is a copy 
 and paste of some key points.
 
-### Names to Avoid<a id="names-avoid"></a>
+#### Names to Avoid<a id="names-avoid"></a>
 Never use the characters ‘l’ (lowercase letter el), ‘O’ (uppercase letter oh), or ‘I’ (uppercase letter eye) as 
 single character variable names.
 
 In some fonts, these characters are indistinguishable from the numerals one and zero. When tempted to use ‘l’, use ‘L’ 
 instead.
 
-### Package and Modules<a id="packages-modules"></a>
+#### Package and Modules<a id="packages-modules"></a>
 Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. 
 Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.
 
-### Classes<a id="classes"></a>
+#### Classes<a id="classes"></a>
 Class names should normally use the CapWords _(aka CamelCase)_ convention.
 
 There is a note in [PEP 8](https://pep8.org/#class-names) where _"The naming convention for functions may be used 
 instead"_. Disregard this. We will always use CapWords.
 
-### Methods/Functions<a id="methods-functions"></a>
+#### Methods/Functions<a id="methods-functions"></a>
 Function names should be lowercase, with words separated by underscores.
 
 There is a note in [PEP 8](https://pep8.org/#function-names) where underscores are used optionally to improve 
 readability. Disregard this. Underscores always improve readability.
 
-#### Leading and Trailing Underscores<a id="underscores"></a>
+##### Leading and Trailing Underscores<a id="underscores"></a>
 Use single leading underscore names to denote a method or a function as private. Additionally from [PEP 8](https://pep8.org/#descriptive-naming-styles) - _"weak “internal use” 
 indicator. E.g. from M import * does not import objects whose name starts with an underscore"_.
 ```python
@@ -103,7 +107,7 @@ def single_trailing_underscore_(x: int) -> bool:
 ```
 
 
-#### Fucntion/Method Arguements<a id="func-method-args"></a>
+##### Fucntion/Method Arguements<a id="func-method-args"></a>
 Always use self for the first argument to instance methods.
 
 Always use cls for the first argument to class methods.
@@ -112,10 +116,10 @@ If a function argument’s name clashes with a reserved keyword, it is generally
 underscore rather than use an abbreviation or spelling corruption. Thus class_ is better than clss. (Perhaps better is 
 to avoid such clashes by using a synonym.)
 
-### Variables<a id="variables"></a>
+#### Variables<a id="variables"></a>
 Variables should follow the naming conventions of methods/functions.
 
-## Imports <a id="variables"></a>
+### Imports <a id="variables"></a>
 Follow the guide for imports in [PEP 8](https://pep8.org/#imports). In general, here are the key points:
 
 #### Import Practices<a id="import-practices"></a>
@@ -139,7 +143,7 @@ from os import chdir, getcwd
 from os import chdir
 from os import getcwd
 ```
-#### Import Location and Organization<a id="import-organization"></a>
+##### Import Location and Organization<a id="import-organization"></a>
 Imports should always be at the top of a file after any module docstrings and before any module globals or constants 
 are defined.
 
@@ -167,7 +171,7 @@ from some_local_module import foo
 SOME_CONSTANT = None
 ```
 
-#### Wildcard Imports Using *<a id="wildcard-imports"></a>
+##### Wildcard Imports Using *<a id="wildcard-imports"></a>
 Avoid using * when importing. This method of import loads everything from that module or package into your module's 
 name space. In most cases, this is unecessary. If you only need one object from a package or module, then explicitly 
 import that object instead of everything with a wildcard. If you do need everything from a package or module, 
@@ -188,10 +192,10 @@ Exception to this rule is when using the Django (Galaxy). It is common to import
 `urls.py` using *.
 
 
-## Boolean and None Type Testing<a id="boolean-none-comparisons"></a>
+### Boolean and None Type Testing<a id="boolean-none-comparisons"></a>
 TODO: Add content here
 
-## Type Hinting<a id="type-hinting-syntax"></a>
+### Type Hinting<a id="type-hinting-syntax"></a>
 Type hinting is a little controversial in the Python community. Many people feel that it ges against dynamic typing, 
 which is one of the features of Python that makes it unique. 
 
@@ -200,7 +204,7 @@ own business purposes with a very specific purpose in mind, and type hinting can
 Type hits can also speed up code development with auto-completion in IDEs. Type hints can also help catch bugs when 
 used with a linter (such as [Pylint](https://pypi.org/project/pylint/) or [Flake8](https://flake8.pycqa.org/en/latest/)). 
 
-### Type Hinting Syntax<a id="type-hinting-syntax"></a>
+#### Type Hinting Syntax<a id="type-hinting-syntax"></a>
 The syntax for type hints was defined in [PEP 3107](https://peps.python.org/pep-3107/#syntax). Below are some examples:
 
 ```python
@@ -233,8 +237,7 @@ def bar(a: Union[int, float]) -> Union[None, int]:
         return None
 ```
 
-
-## Comments<a id="comments"></a>
+### Comments<a id="comments"></a>
 The general rule of thumb for good commenting is that your comments should be adding additional context that might not 
 be apparent in the code. Comments not restate exactly what your code is doing.
 
@@ -244,10 +247,10 @@ __BAD__
 print(results)
 ```
 
-### Single Line Comments<a id="single-line-comments"></a>
+#### Single Line Comments<a id="single-line-comments"></a>
 TODO: Add content 
 
-### Docstrings<a id="docstrings"></a>
+#### Docstrings<a id="docstrings"></a>
 For docstrings, follow [PEP 257](https://peps.python.org/pep-0257/). 
 
 Here is an example for a single line docstring:
@@ -270,7 +273,7 @@ def bar():
     """
 ```
 
-## Exception Handling<a id="exception-handling"></a>
+### Exception Handling<a id="exception-handling"></a>
 Whenever handling exceptions with a try/except block, do not use a bare exception as this can hide bugs in your code. 
 Always capture specific exceptions.
 
@@ -291,34 +294,79 @@ def raises_an_exception(some_list):
     except IndexError:
         return None
 ```
-The one exception to this rule is with the `if __name__ == '__main__'`. The bare try/except blocks here capture the 
-error and log it before terminating teh code.
+The one exception to this rule is using a bare try/except block within the `if __name__ == '__main__'`. The bare try/except blocks here capture the 
+error, log it, and send a Slack notification before terminating the code.
 
-## Opening Files/Writing to Files<a id="file-io"></a>
+### Opening Files/Writing to Files<a id="file-io"></a>
 
-Whenever opening files, always use a context manager.  With a context manager, you never have to worry about closing 
-the file when your code is done, which reduces the risk of corrupting your file.
+Whenever opening files, always use the `with` command. This creates a context manager, which reads cleaner and reduces the risk of corrupting your file.
 
 __BAD__
 ```python
-f = open('file.txt')
-a = f.read()
-print(a)
+f = open('file.txt', "w")
+f.write("Hello World!")
 f.close()
 ```
 
 __GOOD__
 ```python
 with open('file.txt') as f:
-    for line in f:
-        print(line)
+    f.write("Hello World!")
 ```
 
-## Quotes<a id="quotes"></a>
+### Quotes<a id="quotes"></a>
+Python doesn't have a stance on whether single or double quotes are better for strings. Since the vast majority of 
+existing code uses double quotes, lets stick to using double quotes. 
+
+### Multi-line Signatures and Function Calls<a id="multi-line"></a>
+When the signature of a function or a call to a function exceeds the set line length, then separate the signature or call over multiple lines with each parameter getting it's own line.
+
+__EXAMPLE__
+```python
+# Pretend these are really long
+
+# Long function signature
+def some_long_func(
+        a: str, 
+        b: str, 
+        c: str,
+        d: str
+) -> None:
+    # Do some stuff
+    return None
+
+# Long function call
+some_long_func(
+  "my", 
+  "dog", 
+  "eats", 
+  "rocks"
+)
+```
+You don't have to only do this when exceeding the line limit. If at any point you feel that breaking these up over 
+multiple lines makes your code more readable, then have at it! 
+
+### Line Length<a id="line-length"></a>
 TODO: Add content here
 
-## Multi-line Signatures and Function Calls<a id="multi-line"></a>
-TODO: Add content here
+# Coding Practices<a id="practices"></a>
 
-## Line Length<a id="line-length"></a>
-TODO: Add content here
+## Repo Must-Haves
+
+### Logging
+
+### Readme
+
+### Slack Notifications
+
+## Development Workflow
+
+## Environments
+
+## Repo Layout
+
+### Flat Layout
+
+### src Layout
+
+## Testing
