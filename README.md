@@ -360,8 +360,47 @@ TODO: Add content here
 ### Slack Notifications
 
 ## Development Workflow
+Development should always be done on your local machine to avoid breaking production or losing data. The pipelines on our servers are for production and should always be on the main branch whenever possible.
+
+A high level development workflow example:
+1. Write a test spec for the product/feature you're building
+2. Prep for development
+   1. If new work, create a new repo and create a development branch
+      1. Add branch protections (?)
+   2. If refactoring/creating a feature, checkout whichever branch you are planning to develop off of (this should almost always be main), and run `git pull` to get the most up-to-date code. Then create your development branch
+      1. Helpful hint is to use a Jira issue ID or a semvar version number in the name. This can help point to documentation for your work incase you forget what the branch was for or incase someone else needs to look at the code.
+3. Write your code. Commit and push often. You'll be happy you did if anything happens to your computer.
+4. Test your code. This can look different from project to project. Whatever you choose to do, make sure you are covering your edge cases and the code is working as expected.
+5. Once done with dev and testing, open a PR in GitHub
+6. Once the PR is approved and merged to main: 
+   1. If new repo: 
+      - ssh into server
+      - run `git clone <git repo address>` in `jobs` directory
+      - build docker image
+      - schedule job to run in crontab 
+   2. If existing repo:
+      - ssh into server and navigate to the repo's directory (should be in `/home/data_admin/jobs`)
+      - Make sure repo is on main branch and run `git pull`
+      - Rebuild docker image
+      - Check that the new image name matches the image name in the command in crontab, so it will still run as expected. If not, then rename the image or update the command
 
 ## Environments
+We use Pipenv to manage our environments in dev and production. We'll give a brief overview below, but Pipenv documentation can be found [here](https://pipenv.pypa.io/en/latest/) if you want to know more.
+
+### A little about Pipenv
+Pipenv generates two files: Pipfile and Pipfile.lock. Both of these files need to be included in our git repos.
+
+The Pipfile is a file that tracks all of our dependencies for a repo with broad versioning. Most of our dependencies will have an `*` which indicates that we are using the latest version of a package. Some packages may also indicate that we are only using a version before/after some specific version.
+
+The Pipfile.lock file is a file that tracks the specific packages that are installed in the environment (based on what is in the Pipfile). The Pipfile.lock file is not meant to be edited.
+
+### How we use Pipenv
+It is recommended by Pipenv and others to always set up you environment by installing from the Pipfile.lock. We don't do it this way, so forget what you just read.
+
+We always build out docker images by installing Pipenv and then running `pipenv intall --skip-lock`. This command will create a virtual environment with the most up-to-date versions of a repos dependencies allowed by the Pipfile. The benefit to this is that it ensures our repos are operating on the most up-to-date code as possible. The downside is that sometimes a new release of a package might not be compatible with your code or other dependencies in your repo. This is where the Pipfile.lock comes in handy.
+
+The Pipfile.lock file is our plan to handle any dependency issues. While developing, keep your Pipfile.lock file up to date by running `pipenv update` regularly. If you hit an issue, you can fall back to the Pipfile.lock on main in Github. When you finish developing, make sure your most up to date Pipfile.lock is included in your PR so we are able to recreate the last known stable environment for the repo.
+
 
 ## Repo Layout
 
