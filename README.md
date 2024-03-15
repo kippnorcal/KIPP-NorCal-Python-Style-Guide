@@ -402,10 +402,40 @@ We always build out docker images by installing Pipenv and then running `pipenv 
 The Pipfile.lock file is our plan to handle any dependency issues. While developing, keep your Pipfile.lock file up to date by running `pipenv update` regularly. If you hit an issue, you can fall back to the Pipfile.lock on main in Github. When you finish developing, make sure your most up to date Pipfile.lock is included in your PR so we are able to recreate the last known stable environment for the repo.
 
 
-## Repo Layout
+## Repo Conventions
+Below is a guide as to what general practices we follow with structure and naming conventions of our repos. This section is not meant to be mandatory as the needs of each repo's structure is different depending on the complexity of the code. It is strongly encouraged to follow the below convention if your code begins to get complex. The benefit of following the conventions below is that others will be able to understand your code and its intended purpose just by the structure and names of packages.  
 
-### Flat Layout
+### Repository Layouts
 
-### src Layout
+#### Flat Layout
+A flat layout is where all of the files of the repo are in the root directory. This is recommended for smaller projects with few files and little code where there isn't any real benefit to structuring the code.
+
+#### src Layout
+This is a specific layout where none of your code is in the root directory. Instead, the code is inside a `src` directory which contains a package where your code lives. The name of the package in the `src` directory should be the same as the name for your repo.
+
+The biggest benefit to this layout is that it allows you to install your code as a package that is an editable install. This type of install is benificial for testing, and you can create a `tests` package in your root directory along side the `src` directory. More information can be found here. # TODO: Add link
+
+#### Hybrid
+A hybrid layout is the inbetween of the flat layout and the src layout. This is for projects that are complex enough where separating your code into packages will help with the organization, but creating a full `src` layout might be too much. With this layout, usually a main.py file will be in the root directory and the rest of the code lives in packages that also live in the root directory.
+
+### Common Package Names in Repositories
+Here are common names that you may find among our repos and an explanation of what they are and what their purpose is. As mentioned in the intro of the section, every repository does not need to have these packages unless there is a need for it. If you find yourself needing to build separate workflows, then create a workflows package to store them in.
+#### Models/Entities
+These packages have classes that are abstract representations of a concept and manages a state (a class that represents an employee) or value (a class that manages a queue). 
+#### Repos or Repositories
+Not to be confused with git repos, these packages will contain code that implements the repository design pattern. The classes that implement this pattern usually wraps a data resource (ex. external API or data warehouse connection) with common CRUD operations.
+#### Services or Formatters
+These packages have two uses. 
+
+One use is that they sit between a repository object and the business logic and perform some transformation to data. Sometimes they get data from a repository object and prepare it for use by a workflow, or take data from a workflow and shape it for insertion into a repository.
+
+Another use is where they perform a common operation that is shared across multiple workflows.
+#### Sessions
+Sessions are objects that manage meta data around a job that is running. They might keep track or runtime arguments or any other data that the job might rely on.
+#### Utils
+This package is for ancillary parts of the code. Run time args, exceptions, data maps, or helper functions that might be used across packages.
+#### Workflows
+Workflows are the business logic. Some code bases may only have one job to perform and a workflow package might not be needed, others might have multiple workflows where each one handles a different edge case. Workflows are typically built using services and don't usually work directly with repositories.
+
 
 ## Testing
