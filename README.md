@@ -363,12 +363,12 @@ TODO: Add content here
 Development should always be done on your local machine to avoid breaking production or losing data. The pipelines on our servers are for production and should always be on the main branch whenever possible.
 
 A high level development workflow example:
-1. Write a test spec for the product/feature you're building
+1. Write a [tech spec](#tech-spec) for the product/feature you're building
 2. Prep for development
    1. If new work, create a new repo and create a development branch
-      1. Add branch protections (?)
+      - Add branch protections to require reviews on PRs and to block commits to main
    2. If refactoring/creating a feature, checkout whichever branch you are planning to develop off of (this should almost always be main), and run `git pull` to get the most up-to-date code. Then create your development branch
-      1. Helpful hint is to use a Jira issue ID or a semvar version number in the name. This can help point to documentation for your work incase you forget what the branch was for or incase someone else needs to look at the code.
+      - Helpful hint is to use a Jira issue ID or a semvar version number in the name. This can help point to documentation for your work incase you forget what the branch was for or incase someone else needs to look at the code.
 3. Write your code. Commit and push often. You'll be happy you did if anything happens to your computer.
 4. Test your code. This can look different from project to project. Whatever you choose to do, make sure you are covering your edge cases and the code is working as expected.
 5. Once done with dev and testing, open a PR in GitHub
