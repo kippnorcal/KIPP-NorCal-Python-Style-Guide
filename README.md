@@ -172,8 +172,8 @@ SOME_CONSTANT = None
 ```
 
 ##### Wildcard Imports Using *<a id="wildcard-imports"></a>
-Avoid using * when importing. This method of import loads everything from that module or package into your module's 
-name space. In most cases, this is unecessary. If you only need one object from a package or module, then explicitly 
+Avoid using wildcard imports (*) when importing. This method of import loads everything from that module or package directly into your module's 
+name space. In most cases, this is unnecessary. If you only need one object from a package or module, then explicitly 
 import that object instead of everything with a wildcard. If you do need everything from a package or module, 
 then import the package or module to avoid namespace issues.
 
@@ -188,20 +188,20 @@ import os
 # or this if you need one function
 from os import getcwd
 ```
-Exception to this rule is when using the Django (Galaxy). It is common to import models into `views.py` or importing views into 
-`urls.py` using *.
+Exception to this rule is when using the Django (Galaxy). It is common to import models into `views.py` using a wildcard, or importing views into 
+`urls.py` using a wildcard import. This is because of Django's structure, and it is idiomatic for the Django framework.
 
 
 ### Boolean and None Type Testing<a id="boolean-none-comparisons"></a>
 TODO: Add content here
 
 ### Type Hinting<a id="type-hinting-syntax"></a>
-Type hinting is a little controversial in the Python community. Many people feel that it ges against dynamic typing, 
+Type hinting is a little controversial in the Python community. Many people feel that it goes against dynamic typing, 
 which is one of the features of Python that makes it unique. 
 
 For KIPP NorCal, many of our repos are designed for our 
-own business purposes with a very specific purpose in mind, and type hinting can be a useful way to document code. 
-Type hits can also speed up code development with auto-completion in IDEs. Type hints can also help catch bugs when 
+own business purposes with a very specific set of requirements in mind, and type hinting can be a useful way to document code. 
+Type hints can also speed up code development with auto-completion in IDEs. Type hints can also help catch bugs when 
 used with a linter (such as [Pylint](https://pypi.org/project/pylint/) or [Flake8](https://flake8.pycqa.org/en/latest/)). 
 
 #### Type Hinting Syntax<a id="type-hinting-syntax"></a>
@@ -239,7 +239,7 @@ def bar(a: Union[int, float]) -> Union[None, int]:
 
 ### Comments<a id="comments"></a>
 The general rule of thumb for good commenting is that your comments should be adding additional context that might not 
-be apparent in the code. Comments not restate exactly what your code is doing.
+be apparent in the code. Comments should not restate exactly what your code is doing.
 
 __BAD__
 ```python
@@ -408,9 +408,9 @@ The Pipfile is a file that tracks all of our dependencies for a repo with broad 
 The Pipfile.lock file is a file that tracks the specific packages that are installed in the environment (based on what is in the Pipfile). The Pipfile.lock file is not meant to be edited.
 
 ### How we use Pipenv
-It is recommended by Pipenv and others to always set up you environment by installing from the Pipfile.lock. We don't do it this way, so forget what you just read.
+It is recommended by Pipenv and others to always set up you environment by installing from the Pipfile.lock file. We don't do it this way, so forget what you just read.
 
-We always build out docker images by installing Pipenv and then running `pipenv intall --skip-lock`. This command will create a virtual environment with the most up-to-date versions of a repos dependencies allowed by the Pipfile. The benefit to this is that it ensures our repos are operating on the most up-to-date code as possible. The downside is that sometimes a new release of a package might not be compatible with your code or other dependencies in your repo. This is where the Pipfile.lock comes in handy.
+We always build our docker images by installing Pipenv and then running `pipenv intall --skip-lock`. This command will create a virtual environment with the most up-to-date versions of a repo's dependencies allowed by the Pipfile. The benefit to this is that it ensures our repos are operating on the most up-to-date code as possible. The downside is that sometimes a new release of a package might not be compatible with your code or other dependencies in your repo. This is where the Pipfile.lock comes in handy.
 
 The Pipfile.lock file is our plan to handle any dependency issues. While developing, keep your Pipfile.lock file up to date by running `pipenv update` regularly. If you hit an issue, you can fall back to the Pipfile.lock on main in Github. When you finish developing, make sure your most up to date Pipfile.lock is included in your PR so we are able to recreate the last known stable environment for the repo.
 
@@ -429,12 +429,12 @@ This is a specific layout where none of your code is in the root directory. Inst
 The biggest benefit to this layout is that it allows you to install your code as a package that is an editable install. This type of install is benificial for testing, and you can create a `tests` package in your root directory along side the `src` directory. More information can be found here. # TODO: Add link
 
 #### Hybrid
-A hybrid layout is the inbetween of the flat layout and the src layout. This is for projects that are complex enough where separating your code into packages will help with the organization, but creating a full `src` layout might be too much. With this layout, usually a main.py file will be in the root directory and the rest of the code lives in packages that also live in the root directory.
+A hybrid layout is the inbetween of the flat layout and the src layout. This is for projects that are complex enough where separating your code into packages will help with the organization, but creating a full `src` layout might be too much. With this layout, usually a main.py file will be in the root directory and the rest of the code is in packages that also live in the root directory along with main.py.
 
 ### Common Package Names in Repositories
 Here are common names that you may find among our repos and an explanation of what they are and what their purpose is. As mentioned in the intro of the section, every repository does not need to have these packages unless there is a need for it. If you find yourself needing to build separate workflows, then create a workflows package to store them in.
 #### Models/Entities
-These packages have classes that are abstract representations of a concept and manages a state (a class that represents an employee) or value (a class that manages a queue). 
+These packages have classes that are abstract representations of a concept and manages a state (ex. a class that represents an employee) or value (ex. a class that manages a queue). 
 #### Repos or Repositories
 Not to be confused with git repos, these packages will contain code that implements the repository design pattern. The classes that implement this pattern usually wraps a data resource (ex. external API or data warehouse connection) with common CRUD operations.
 #### Services or Formatters
