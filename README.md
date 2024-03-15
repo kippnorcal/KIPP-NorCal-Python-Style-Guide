@@ -384,6 +384,19 @@ A high level development workflow example:
       - Rebuild docker image
       - Check that the new image name matches the image name in the command in crontab, so it will still run as expected. If not, then rename the image or update the command
 
+## Tech Specs<a id="tech-spec"></a>
+New repos or enhancements to code need to be accompanied with a tech spec. Annual code rollover and bug fixes do not require tech specs, however, it's highly encouraged for large bug fixes.
+
+There is a Python/Dev folder on our Data Team drive where tech specs (and other docs) live. There is a template tech spec that can be found [here](https://docs.google.com/document/d/1WZwm-1rNsNtkFbf7B5ha4ksBWvQ_gdRK6Q5HOj_Ic_k/edit#heading=h.ilq6ugotozls). All of our specs are stored in their respective repo's folder [stored here](https://drive.google.com/drive/u/0/folders/1TCqC0Og6YY3vW7jqRGDl4QGZdujYBC__).
+
+The spec template is meant to be flexible. Use what you need and delete what you don't. Feel free to add sections if needed. The purpose of these documents is to capture the why, the how, the expected outcomes and decisions made around new work or an enhancement.
+
+One thing that is required to follow with tech specs is the naming conventions. Naming conventions need to follow: __[SemVar number] - [Repo name] - [Title of work]__. An example would be **4.0 - Google Accounts - Internal Refactor**
+### A note about Semvar
+Semvar stands for semantic versioning. It might seem like overkill, but using semantic versioning when naming our specs will help give a timeline to the specs.
+
+
+
 ## Environments
 We use Pipenv to manage our environments in dev and production. We'll give a brief overview below, but Pipenv documentation can be found [here](https://pipenv.pypa.io/en/latest/) if you want to know more.
 
